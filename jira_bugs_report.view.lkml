@@ -52,7 +52,7 @@ view: jira_bugs_report {
     sql: ${TABLE}.date ;;
   }
 
-  measure: mean_age_days {
+  measure: median_age_days {
     type: sum
     sql: ${TABLE}.mean_age_days ;;
   }
