@@ -11,6 +11,9 @@ datagroup: jira_default_datagroup {
 persist_with: jira_default_datagroup
 
 
+explore: bugs_report {
+  from:  jira_bugs_report
+}
 
 explore: bugs_time {
     from:  jira_issues
