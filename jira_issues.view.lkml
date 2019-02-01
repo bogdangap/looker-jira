@@ -178,30 +178,36 @@ view: jira_issues {
   }
 
   measure: days_logged_on_completed_stories {
+    type: number
     sql:round(${time_spent}/28800,2);;
   }
 
   measure: points_per_cycle_day {
+    type: number
     sql:if(${jira_retrospectives.work_days}!=0, round(${story_points_sum}/${jira_retrospectives.work_days},2), null);;
     group_label: "Calculated Statistics"
   }
 
   measure: points_per_cycle_day_3_months {
+    type: number
     sql:if(${jira_retrospectives.work_days_3_months}!=0,round(${story_points_sum_3_months}/${jira_retrospectives.work_days_3_months},2), null);;
     group_label: "Calculated Statistics"
   }
 
   measure: points_per_logged_day {
+    type: number
     sql: if(${time_spent}!=0, round(${story_points_sum}/${time_spent}*28800,2), null) ;;
     group_label: "Calculated Statistics"
   }
 
   measure: points_per_engineering_day {
+    type: number
     sql: if(${jira_retrospectives.engineering_days}!=0,round(${story_points_sum}/${jira_retrospectives.engineering_days},2),0) ;;
     group_label: "Calculated Statistics"
   }
 
   measure: points_per_engineering_day_3_months {
+    type  :  number
     sql: if(${jira_retrospectives.engineering_days_lag_2}!=0, round(${story_points_sum_3_months}/${jira_retrospectives.engineering_days_3_months},2) ,
         if(${jira_retrospectives.engineering_days_lag_1}!=0,round(${story_points_sum_2_months}/${jira_retrospectives.engineering_days_3_months},2),
         if(${jira_retrospectives.engineering_days}!=0,round(${story_points_sum}/${jira_retrospectives.engineering_days},2),0))) ;;
