@@ -15,59 +15,6 @@ explore: bugs_report {
   from:  jira_bugs_report
 }
 
-explore: bugs_time {
-    from:  jira_issues
-
-  sql_always_where: bugs_time.fields.status.name = 'Closed'
-  AND bugs_time.fields.issuetype.name  IN ('Bug')
-  AND (bugs_time.labels_string NOT LIKE '%internal\\_tools%' OR bugs_time.labels_string IS NULL);;
-
-  join: jira_retrospectives {
-    view_label: "Retrospectives"
-    sql_on: bugs_time.fields.resolutiondate is not null
-           and ${jira_retrospectives.start_date_date} <= ${bugs_time.resolution_date_date}
-          AND ${jira_retrospectives.end_date_date} > ${bugs_time.resolution_date_date};;
-    type:  inner
-    relationship: many_to_one
-  }
-
-  join: jira_issues_time {
-    view_label: "Time in Status"
-    sql_on:  ${bugs_time.id}= ${jira_issues_time.id} ;;
-    type: inner
-    relationship: one_to_many
-  }
-}
-
-explore: completed_issues {
-
-  from: jira_issues
-
-  sql_always_where: completed_issues.fields.status.name = 'Closed'
-  AND completed_issues.fields.issuetype.name  IN ('Story', 'Technical Story')
-  AND (completed_issues.labels_string NOT LIKE '%internal\\_tools%' OR completed_issues.labels_string IS NULL);;
-
-  join: jira_retrospectives {
-    view_label: "Retrospectives"
-    sql_on: completed_issues.fields.resolutiondate is not null
-           and ${jira_retrospectives.start_date_date} <= ${completed_issues.resolution_date_date}
-          AND ${jira_retrospectives.end_date_date} > ${completed_issues.resolution_date_date};;
-    type:  inner
-    relationship: many_to_one
-  }
-
-  join: jira_issues_time {
-    view_label: "Time in Status"
-    sql_on:  ${completed_issues.id}= ${jira_issues_time.id} ;;
-    type: inner
-    relationship: one_to_many
-  }
-}
-
-
-
-
-
 explore: jira_issues {
 
   from: jira_issues
@@ -109,7 +56,6 @@ explore: jira_issues {
     type:  left_outer
   }
 
-
   join: jira_retrospectives {
     view_label: "Retrospectives"
     sql_on: jira_issues.fields.resolutiondate is not null
@@ -117,6 +63,13 @@ explore: jira_issues {
           AND ${jira_retrospectives.end_date_date} > ${jira_issues.resolution_date_date};;
     type:  inner
     relationship: many_to_one
+  }
+
+  join: jira_issues_time {
+    view_label: "Time in Status"
+    sql_on:  ${jira_issues.id}= ${jira_issues_time.id} ;;
+    type: inner
+    relationship: one_to_many
   }
 
 }
