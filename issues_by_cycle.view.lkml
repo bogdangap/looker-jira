@@ -75,7 +75,7 @@ view: issues_by_cycle {
     group_label: "By Cycle"
     label: "AVG Days per Cycle"
     value_format_name: decimal_1
-    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.date_date,issues_daily.process_step,issues_daily.days,days_in_cycle]
+    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.process_step,issues_daily.days,days_in_cycle]
   }
 
   measure: median_days {
@@ -85,7 +85,7 @@ view: issues_by_cycle {
     group_label: "By Cycle"
     label: "Median Days per Cycle"
     value_format_name: decimal_1
-    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.date_date,issues_daily.process_step,issues_daily.days,days_in_cycle]
+    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.process_step,issues_daily.days,days_in_cycle]
   }
 
   measure: avg_days_in_active_cycle {
@@ -95,7 +95,7 @@ view: issues_by_cycle {
     group_label: "By Cycle"
     label: "AVG Days in Active Cycle"
     value_format_name: decimal_1
-    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.date_date,issues_daily.process_step,issues_daily.days,days_in_cycle]
+    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.process_step,issues_daily.days,days_in_cycle]
   }
 
   measure: median_days_in_active_cycle {
@@ -105,7 +105,7 @@ view: issues_by_cycle {
     group_label: "By Cycle"
     label: "Median Days in Active Cycle"
     value_format_name: decimal_1
-    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.date_date,issues_daily.process_step,issues_daily.days,days_in_cycle]
+    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.process_step,issues_daily.days,days_in_cycle]
   }
 
   measure: percentile_days_in_active_cycle_25 {
@@ -116,7 +116,7 @@ view: issues_by_cycle {
     group_label: "By Cycle"
     label: "Days in Active Cycle 25th Percentile"
     value_format_name: decimal_1
-    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.date_date,issues_daily.process_step,issues_daily.days,days_in_cycle]
+    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.process_step,issues_daily.days,days_in_cycle]
   }
 
   measure: percentile_days_in_active_cycle_75 {
@@ -127,6 +127,6 @@ view: issues_by_cycle {
     group_label: "By Cycle"
     label: "Days in Active Cycle 75th Percentile"
     value_format_name: decimal_1
-    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.date_date,issues_daily.process_step,issues_daily.days,days_in_cycle]
+    drill_fields: [jira_issues.key,jira_issues.summary,issues_daily.process_step,issues_daily.days,days_in_cycle]
   }
 }
