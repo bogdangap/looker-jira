@@ -50,7 +50,7 @@ view: issues_by_cycle {
 
   measure: days_in_cycle {
     type:sum
-    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE 0 END ;;
+    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE null END ;;
     view_label: "Issues Daily"
     group_label: "By Cycle"
     label: "Days In Active Cycle"
