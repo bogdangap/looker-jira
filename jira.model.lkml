@@ -11,8 +11,48 @@ datagroup: jira_default_datagroup {
 persist_with: jira_default_datagroup
 
 
-explore: bugs_report {
-  from:  jira_bugs_report
+explore: issues_daily {
+  from:  issues_daily
+
+  fields: [
+
+    ALL_FIELDS*,
+    #hides access AND queryability
+    #-jira_issues.count,
+  ]
+
+  join: jira_retrospectives {
+    view_label: "Retrospectives"
+    sql_on: ${issues_daily.retrospective} = ${jira_retrospectives.name};;
+    type: left_outer
+    relationship: many_to_one
+  }
+  join: jira_issues {
+    view_label: "Issues"
+    sql_on: ${issues_daily.key} = ${jira_issues.key};;
+    type: inner
+    relationship: many_to_one
+  }
+  join: issues_by_status {
+    sql_on: (${issues_daily.key} = ${issues_by_status.key} AND ${issues_daily.status} = ${issues_by_status.status});;
+    type: left_outer
+    relationship: many_to_one
+  }
+  join: issues_by_process {
+    sql_on: (${issues_daily.key} = ${issues_by_process.key} AND ${issues_daily.process_step} = ${issues_by_process.process_step});;
+    type: left_outer
+    relationship: many_to_one
+  }
+  join: issues_by_cycle {
+    sql_on: (${issues_daily.key} = ${issues_by_cycle.key} AND ${issues_daily.in_cycle} = ${issues_by_cycle.in_cycle});;
+    type: left_outer
+    relationship: many_to_one
+  }
+  join: issues_total {
+    sql_on: ${issues_daily.key} = ${issues_total.key};;
+    type: left_outer
+    relationship: many_to_one
+  }
 }
 
 explore: jira_issues {

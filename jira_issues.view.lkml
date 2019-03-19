@@ -79,6 +79,17 @@ view: jira_issues {
     sql: ${TABLE}.fields.priority.name ;;
   }
 
+  dimension: priority_number {
+    type: string
+    sql: CASE WHEN ${priority_name} = "High" THEN "1"
+              WHEN ${priority_name} = "Medium" THEN "2"
+              WHEN ${priority_name} = "Low" THEN "3"
+              WHEN ${priority_name} = "Lowest" THEN "4"
+              WHEN ${priority_name} = "Default" THEN "5"
+              ELSE "0" END
+              ;;
+  }
+
   dimension: project_key {
     type: string
     sql: ${TABLE}.fields.project.key ;;
@@ -114,6 +125,7 @@ view: jira_issues {
   }
 
   dimension: status_name {
+    label: "Current Status"
     type: string
     sql: ${TABLE}.fields.status.name ;;
   }
@@ -128,22 +140,32 @@ view: jira_issues {
     sql: ${TABLE}.fields.issuetype.name ;;
   }
 
-
   dimension: story_points {
     type: string
-    sql: ${TABLE}.fields.customfield_10021 ;;
+    sql: CAST(${TABLE}.fields.customfield_10021 AS STRING);;
   }
-
 
   dimension: labels_string {
     type: string
     sql: ${TABLE}.labels_string ;;
   }
 
+  dimension: term {
+    type: string
+    sql: CASE
+    WHEN ${labels_string} LIKE '%2019-t1%' THEN '2019-T1'
+    WHEN ${labels_string} LIKE '%2019-t2%' THEN '2019-T2'
+    WHEN ${labels_string} LIKE '%2019-t3%' THEN '2019-T3'
+    WHEN ${labels_string} LIKE '%2019-t4%' THEN '2019-T4'
+    WHEN ${labels_string} LIKE '%2019-t5%' THEN '2019-T5'
+  ELSE NULL END ;;
+  }
+
   measure: story_points_sum {
     type: sum
     sql: ${TABLE}.fields.customfield_10021 ;;
     group_label: "Story Points"
+    drill_fields: [key,summary,status_name,updated_date,resolution_date_date,story_points_sum]
   }
 
   measure: story_points_sum_3_months{
@@ -174,7 +196,7 @@ view: jira_issues {
 
   measure: count {
     type: count
-    #drill_fields: [id]
+    drill_fields: [key,summary]
   }
 
   measure: days_logged_on_completed_stories {

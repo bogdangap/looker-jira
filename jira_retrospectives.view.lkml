@@ -12,6 +12,12 @@ view: jira_retrospectives {
     sql: ${TABLE}.work_days ;;
   }
 
+  dimension: work_days_dimension {
+    type: number
+    sql: ${TABLE}.work_days ;;
+    hidden: yes
+  }
+
   measure: work_days_3_months {
     type:  sum
     sql:  ${TABLE}.work_days_3_rows;;
