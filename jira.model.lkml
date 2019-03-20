@@ -11,8 +11,8 @@ datagroup: jira_default_datagroup {
 persist_with: jira_default_datagroup
 
 
-explore: issues_daily {
-  from:  issues_daily
+explore: jira_issues_statistics {
+  from:  jira_issues_statistics
 
   fields: [
 
@@ -23,33 +23,38 @@ explore: issues_daily {
 
   join: jira_retrospectives {
     view_label: "Retrospectives"
-    sql_on: ${issues_daily.retrospective} = ${jira_retrospectives.name};;
+    sql_on: ${jira_issues_statistics.retrospective} = ${jira_retrospectives.name};;
     type: left_outer
     relationship: many_to_one
   }
   join: jira_issues {
     view_label: "Issues"
-    sql_on: ${issues_daily.key} = ${jira_issues.key};;
+    sql_on: ${jira_issues_statistics.key} = ${jira_issues.key};;
     type: inner
     relationship: many_to_one
   }
   join: issues_by_status {
-    sql_on: (${issues_daily.key} = ${issues_by_status.key} AND ${issues_daily.status} = ${issues_by_status.status});;
+    sql_on: (${jira_issues_statistics.key} = ${issues_by_status.key} AND ${jira_issues_statistics.status} = ${issues_by_status.status});;
     type: left_outer
     relationship: many_to_one
   }
   join: issues_by_process {
-    sql_on: (${issues_daily.key} = ${issues_by_process.key} AND ${issues_daily.process_step} = ${issues_by_process.process_step});;
+    sql_on: (${jira_issues_statistics.key} = ${issues_by_process.key} AND ${jira_issues_statistics.process_step} = ${issues_by_process.process_step});;
     type: left_outer
     relationship: many_to_one
   }
   join: issues_by_cycle {
-    sql_on: (${issues_daily.key} = ${issues_by_cycle.key} AND ${issues_daily.in_cycle} = ${issues_by_cycle.in_cycle});;
+    sql_on: (${jira_issues_statistics.key} = ${issues_by_cycle.key} AND ${jira_issues_statistics.in_cycle} = ${issues_by_cycle.in_cycle});;
     type: left_outer
     relationship: many_to_one
   }
+  join: issues_by_story_points {
+    sql_on: (${jira_issues.story_points} = ${issues_by_story_points.story_points});;
+    type: inner
+    relationship: many_to_one
+  }
   join: issues_total {
-    sql_on: ${issues_daily.key} = ${issues_total.key};;
+    sql_on: ${jira_issues_statistics.key} = ${issues_total.key};;
     type: left_outer
     relationship: many_to_one
   }
