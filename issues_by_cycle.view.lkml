@@ -98,16 +98,6 @@ view: issues_by_cycle {
     drill_fields: [jira_issues.key,jira_issues.summary,jira_issues_statistics.process_step,jira_issues_statistics.days,days_in_cycle]
   }
 
-  measure: days_in_active_cycle_stddev {
-    type: number
-    sql: STDDEV_POP(CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE NULL END) ;;
-    view_label: "Statistics"
-    group_label: "By Cycle"
-    label: "Days in Active Cycle Standard Deviation"
-    value_format_name: decimal_1
-    drill_fields: [jira_issues.key,jira_issues.summary,jira_issues_statistics.process_step,jira_issues_statistics.days,days_in_cycle]
-  }
-
   measure: median_days_in_active_cycle {
     type: median
     sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE NULL END ;;

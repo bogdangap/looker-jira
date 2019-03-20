@@ -16,12 +16,12 @@ view: issues_by_story_points {
   #indexes: ["id","dates"]
     }
 
- #dimension: id {
- #  type: string
- #  primary_key: yes
- #  hidden: yes
- #  sql: CONCAT(${TABLE}.key,${TABLE}.in_cycle) ;;
- #}
+ dimension: id {
+   type: string
+   primary_key: yes
+   hidden: yes
+   sql: CONCAT(${TABLE}.key,${TABLE}.story_points,${TABLE}.in_cycle) ;;
+ }
 
  #dimension: key {
  #  type: string
@@ -31,7 +31,6 @@ view: issues_by_story_points {
 
   dimension: story_points {
     type: string
-    primary_key: yes
     hidden: yes
     sql: ${TABLE}.story_points ;;
   }
@@ -53,6 +52,25 @@ view: issues_by_story_points {
     type: number
     hidden: no
     sql:STDDEV_POP(CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${TABLE}.days ELSE NULL END);;
+    view_label: "Statistics"
+    group_label: "By Story Points"
+    value_format_name: decimal_2
+  }
+
+  measure: avg_days_in_active_cycle {
+    type: average
+    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${TABLE}.days ELSE NULL END ;;
+    view_label: "Statistics"
+    group_label: "By Story Points"
+    label: "Avg Days in Active Cycle"
+  }
+
+  measure: z_score {
+    type: number
+    sql: (${issues_by_cycle.days_in_cycle}-${avg_days_in_active_cycle})/(NULLIF(${active_stddev},0));;
+    view_label: "Statistics"
+    group_label: "By Story Points"
+    value_format_name: decimal_2
   }
   #measure: stddev_distinct {
   #  type: number
