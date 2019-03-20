@@ -72,6 +72,7 @@ view: issues_by_story_points {
     group_label: "By Story Points"
     value_format_name: decimal_2
   }
+
   #measure: stddev_distinct {
   #  type: number
   #  hidden: no
