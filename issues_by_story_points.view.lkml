@@ -73,6 +73,22 @@ view: issues_by_story_points {
     value_format_name: decimal_2
   }
 
+  measure: min {
+    type: min
+    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${TABLE}.days ELSE NULL END;;
+    view_label: "Statistics"
+    group_label: "By Story Points"
+    value_format_name: decimal_2
+  }
+
+  measure: max {
+    type: max
+    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${TABLE}.days ELSE NULL END;;
+    view_label: "Statistics"
+    group_label: "By Story Points"
+    value_format_name: decimal_2
+  }
+
   #measure: stddev_distinct {
   #  type: number
   #  hidden: no
