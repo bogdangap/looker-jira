@@ -63,6 +63,7 @@ view: issues_by_story_points {
     view_label: "Statistics"
     group_label: "By Story Points"
     label: "Avg Days in Active Cycle"
+    value_format_name: decimal_2
   }
 
   measure: z_score {
