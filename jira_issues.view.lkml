@@ -23,6 +23,16 @@ view: jira_issues {
     sql: ${TABLE}.key ;;
   }
 
+  dimension: key_url {
+    sql: CONCAT('https://happyco.atlassian.net/browse/',(CAST(${key} AS STRING)),'/') ;;
+    hidden: yes
+  }
+
+  dimension: link {
+    sql: ${key_url} ;;
+    html: <a href="{{ value }}" target="_blank">{{ key }} <img src="https://storage.googleapis.com/happyco-downloadable-assets/bi/public/external-link.png" style=" width: 8px; height: 8px; display: inline-block;" /></a> ;;
+  }
+
   dimension: self {
     hidden:  yes
     type: string
