@@ -246,4 +246,27 @@ view: jira_issues {
     group_label: "Calculated Statistics"
   }
 
+  dimension: priority_multiplier_dimension {
+    type: number
+    sql: CASE WHEN ${priority_name} = "Highest" THEN 8
+              WHEN ${priority_name} = "High" THEN 5
+              WHEN ${priority_name} = "Medium" THEN 3
+              WHEN ${priority_name} = "Low" THEN 2
+              WHEN ${priority_name} = "Lowest" THEN 1
+              ELSE 1 END;;
+    hidden: no
+  }
+
+  measure: priority_multiplier {
+    type: sum
+    sql: ${priority_multiplier_dimension} ;;
+    hidden: no
+  }
+
+  measure: quality_score {
+    type: number
+    sql: ${count}*${priority_multiplier} ;;
+    group_label: "Calculated Statistics"
+  }
+
 }

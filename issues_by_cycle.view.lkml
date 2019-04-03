@@ -108,25 +108,4 @@ view: issues_by_cycle {
     drill_fields: [jira_issues.link,jira_issues.summary,jira_issues_statistics.process_step,jira_issues_statistics.days]
   }
 
-  measure: percentile_days_in_active_cycle_25 {
-    type: percentile
-    percentile: 25
-    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE NULL END ;;
-    view_label: "Statistics"
-    group_label: "By Cycle"
-    label: "Days in Active Cycle 25th Percentile"
-    value_format_name: decimal_1
-    drill_fields: [jira_issues.link,jira_issues.summary,jira_issues_statistics.process_step,jira_issues_statistics.days]
-  }
-
-  measure: percentile_days_in_active_cycle_75 {
-    type: percentile
-    percentile: 75
-    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE NULL END ;;
-    view_label: "Statistics"
-    group_label: "By Cycle"
-    label: "Days in Active Cycle 75th Percentile"
-    value_format_name: decimal_1
-    drill_fields: [jira_issues.link,jira_issues.summary,jira_issues_statistics.process_step,jira_issues_statistics.days]
-  }
 }
