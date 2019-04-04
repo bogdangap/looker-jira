@@ -1,7 +1,7 @@
 view: issues_by_story_points {
   derived_table: {
     sql:
-      SELECT issues_by_cycle.key, CAST(jira_issues.fields.customfield_10021 AS STRING) as story_points, in_cycle, days_in_work_minutes/480 as days
+      SELECT issues_by_cycle.key, CAST(jira_issues.fields.customfield_10021 AS STRING) as story_points, in_cycle, minutes/480 as days
       FROM ${issues_by_cycle.SQL_TABLE_NAME} as issues_by_cycle
       JOIN prod.jira_issues as jira_issues
       ON issues_by_cycle.key = jira_issues.key

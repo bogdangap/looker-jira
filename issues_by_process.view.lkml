@@ -1,7 +1,7 @@
 view: issues_by_process {
   derived_table: {
     sql:
-      SELECT key, process_step, MIN(started_at) as started_at, MAX(ended_at) as ended_at, SUM(minutes) as minutes, SUM(days_in_work_minutes) as days_in_work_minutes
+      SELECT key, process_step, MIN(started_at) as started_at, MAX(ended_at) as ended_at, SUM(minutes) as minutes
       FROM ${jira_issues_statistics.SQL_TABLE_NAME}
       WHERE {% if jira_issues_statistics.process_step._is_filtered %} {% condition jira_issues_statistics.process_step %} process_step {% endcondition %} {% else %} 1=1 {% endif %}
       AND {% if jira_issues_statistics.status._is_filtered %} {% condition jira_issues_statistics.status %} status {% endcondition %} {% else %} 1=1 {% endif %}
@@ -43,10 +43,10 @@ view: issues_by_process {
     hidden: yes
   }
 
-  dimension: days_in_work_minutes {
+  dimension: minutes_dimension {
     type: number
     hidden: yes
-    sql: ${TABLE}.days_in_work_minutes/480;;
+    sql: ${TABLE}.minutes/480;;
   }
 
   measure: avg_hours {
@@ -61,7 +61,7 @@ view: issues_by_process {
 
   measure: avg_days {
     type: average
-    sql: ${days_in_work_minutes} ;;
+    sql: ${minutes_dimension} ;;
     view_label: "Statistics"
     group_label: "By Process"
     label: "AVG Days per Process"
@@ -71,7 +71,7 @@ view: issues_by_process {
 
   measure: median_days {
     type: median
-    sql: ${days_in_work_minutes} ;;
+    sql: ${minutes_dimension} ;;
     view_label: "Statistics"
     group_label: "By Process"
     label: "Median Days per Process"

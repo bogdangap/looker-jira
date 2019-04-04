@@ -127,12 +127,6 @@ view: jira_issues_statistics {
    sql: ${TABLE}.minutes ;;
  }
 
- dimension: days_in_work_minutes {
-   type: number
-   hidden: yes
-   sql: ${TABLE}.days_in_work_minutes ;;
- }
-
  measure: hours {
    type: sum
    sql: ${minutes_dimension}/60 ;;
@@ -143,7 +137,7 @@ view: jira_issues_statistics {
 
  measure: days {
    type: sum
-   sql: ${days_in_work_minutes}/480 ;;
+   sql: ${minutes_dimension}/480 ;;
    value_format_name: decimal_1
    label: "Total Days"
    drill_fields: [jira_issues.key,jira_issues.summary,date_date,process_step,days]

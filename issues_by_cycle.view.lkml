@@ -1,7 +1,7 @@
 view: issues_by_cycle {
   derived_table: {
     sql:
-      SELECT key, CASE WHEN process_step IN ('1. Backlog','2. Preparation') THEN '1. Open' WHEN process_step IN ('3. In Progress','4. QA') THEN '2. In Cycle' WHEN process_step = '5. Completion' THEN '3. Complete'  WHEN process_step = '0. Cancelled' THEN '0. Cancelled' ELSE '0. Not In Cycle' END as in_cycle, MIN(started_at) as started_at, MAX(ended_at) as ended_at, SUM(minutes) as minutes, SUM(days_in_work_minutes) as days_in_work_minutes
+      SELECT key, CASE WHEN process_step IN ('1. Backlog','2. Preparation') THEN '1. Open' WHEN process_step IN ('3. In Progress','4. QA') THEN '2. In Cycle' WHEN process_step = '5. Completion' THEN '3. Complete'  WHEN process_step = '0. Cancelled' THEN '0. Cancelled' ELSE '0. Not In Cycle' END as in_cycle, MIN(started_at) as started_at, MAX(ended_at) as ended_at, SUM(minutes) as minutes
       FROM ${jira_issues_statistics.SQL_TABLE_NAME}
       WHERE {% if jira_issues_statistics.process_step._is_filtered %} {% condition jira_issues_statistics.process_step %} process_step {% endcondition %} {% else %} 1=1 {% endif %}
       AND {% if jira_issues_statistics.most_recent._is_filtered %} {% condition jira_issues_statistics.most_recent %} most_recent {% endcondition %} {% else %} 1=1 {% endif %}
@@ -42,15 +42,15 @@ view: issues_by_cycle {
     hidden: yes
   }
 
-  dimension: days_in_work_minutes {
+  dimension: minutes_dimension {
     type: number
     hidden: yes
-    sql: ${TABLE}.days_in_work_minutes/480;;
+    sql: ${TABLE}.minutes/480;;
   }
 
   measure: days_in_cycle {
     type:sum
-    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE null END ;;
+    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${minutes_dimension} ELSE null END ;;
     view_label: "Statistics"
     group_label: "By Cycle"
     label: "Days In Active Cycle"
@@ -70,7 +70,7 @@ view: issues_by_cycle {
 
   measure: avg_days {
     type: average
-    sql: ${days_in_work_minutes} ;;
+    sql: ${minutes_dimension} ;;
     view_label: "Statistics"
     group_label: "By Cycle"
     label: "AVG Days per Cycle"
@@ -80,7 +80,7 @@ view: issues_by_cycle {
 
   measure: median_days {
     type: median
-    sql: ${days_in_work_minutes} ;;
+    sql: ${minutes_dimension} ;;
     view_label: "Statistics"
     group_label: "By Cycle"
     label: "Median Days per Cycle"
@@ -90,7 +90,7 @@ view: issues_by_cycle {
 
   measure: avg_days_in_active_cycle {
     type: average
-    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE NULL END ;;
+    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${minutes_dimension} ELSE NULL END ;;
     view_label: "Statistics"
     group_label: "By Cycle"
     label: "AVG Days in Active Cycle"
@@ -100,7 +100,7 @@ view: issues_by_cycle {
 
   measure: median_days_in_active_cycle {
     type: median
-    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${days_in_work_minutes} ELSE NULL END ;;
+    sql: CASE WHEN ${in_cycle} = '2. In Cycle' THEN ${minutes_dimension} ELSE NULL END ;;
     view_label: "Statistics"
     group_label: "By Cycle"
     label: "Median Days in Active Cycle"

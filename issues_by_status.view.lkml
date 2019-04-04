@@ -1,7 +1,7 @@
 view: issues_by_status {
   derived_table: {
     sql:
-      SELECT id, key, process_step, status, started_at, ended_at, SUM(minutes) as minutes, SUM(days_in_work_minutes) as days_in_work_minutes
+      SELECT id, key, process_step, status, started_at, ended_at, SUM(minutes) as minutes
       FROM ${jira_issues_statistics.SQL_TABLE_NAME}
       WHERE {% if jira_issues_statistics.process_step._is_filtered %} {% condition jira_issues_statistics.process_step %} process_step {% endcondition %} {% else %} 1=1 {% endif %}
       AND {% if jira_issues_statistics.status._is_filtered %} {% condition jira_issues_statistics.status %} status {% endcondition %} {% else %} 1=1 {% endif %}
@@ -51,10 +51,10 @@ view: issues_by_status {
     hidden: yes
   }
 
-  dimension: days_in_work_minutes {
+  dimension: minutes_dimension {
     type: number
     hidden: yes
-    sql: ${TABLE}.days_in_work_minutes/480 ;;
+    sql: ${TABLE}.minutes/480 ;;
   }
 
   measure: avg_hours {
@@ -69,7 +69,7 @@ view: issues_by_status {
 
   measure: avg_days {
     type: average
-    sql: ${days_in_work_minutes} ;;
+    sql: ${minutes_dimension} ;;
     view_label: "Statistics"
     group_label: "By Status"
     label: "AVG Days per Status"
@@ -79,7 +79,7 @@ view: issues_by_status {
 
   measure: median_days {
     type: median
-    sql: ${days_in_work_minutes} ;;
+    sql: ${minutes_dimension} ;;
     view_label: "Statistics"
     group_label: "By Status"
     label: "Median Days per Status"
