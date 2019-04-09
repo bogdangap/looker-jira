@@ -118,9 +118,61 @@ view: jira_issues_time {
     group_label: "Time in Engineering Cycle"
   }
 
+  measure: avg_days_in_eng_cycle {
+    type: number
+    sql: ${time_in_eng_cycle_average}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
 
+  measure: median_days_in_eng_cycle {
+    type: number
+    sql: ${time_in_eng_cycle_median}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
 
+  measure: min_days_in_eng_cycle {
+    type: number
+    sql: ${time_in_eng_cycle_min}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
 
+  measure: max_days_in_eng_cycle {
+    type: number
+    sql: ${time_in_eng_cycle_max}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
+
+  measure: avg_days_in_eng_cycle_ex_weekends {
+    type: number
+    sql: ${time_in_eng_cycle_ex_weekends_average}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
+
+  measure: median_days_in_eng_cycle_ex_weekends {
+    type: number
+    sql: ${time_in_eng_cycle_ex_weekends_median}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
+
+  measure: min_days_in_eng_cycle_ex_weekends {
+    type: number
+    sql: ${time_in_eng_cycle_ex_weekends_min}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
+
+  measure: max_days_in_eng_cycle_ex_weekends {
+    type: number
+    sql: ${time_in_eng_cycle_ex_weekends_max}/1440 ;;
+    value_format_name: decimal_1
+    group_label: "Days in Engineering Cycle"
+  }
 
   measure: time_in_waiting_average {
     type: average
