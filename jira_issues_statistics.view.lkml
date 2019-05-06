@@ -30,7 +30,7 @@ view: jira_issues_statistics {
  filter: most_recent {
    type: yesno
    description: "Is this the most recent time the Issue went into this Process Step?"
-   sql: ${TABLE}.most_recent IS TRUE;;
+   sql: CASE WHEN ${TABLE}.most_recent = 1 THEN TRUE ELSE FALSE END;;
  }
 
  dimension: in_cycle {
@@ -89,6 +89,12 @@ view: jira_issues_statistics {
    sql: ${TABLE}.retrospective ;;
  }
 
+  dimension: story_points {
+    type: string
+    hidden: yes
+    sql: ${TABLE}.story_points ;;
+  }
+
  #dimension: term_window {
  #  type: string
  #  hidden: no
@@ -108,6 +114,12 @@ view: jira_issues_statistics {
    sql: ${TABLE}.weekday IS TRUE;;
   description: "Exclude Weekends"
  }
+
+  dimension: day_order {
+    type: yesno
+    hidden: yes
+    sql: ${TABLE}.day_order ;;
+  }
 
  dimension: day_open {
    type: yesno
