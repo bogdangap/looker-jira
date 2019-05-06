@@ -30,7 +30,7 @@ view: jira_issues_statistics {
  filter: most_recent {
    type: yesno
    description: "Is this the most recent time the Issue went into this Process Step?"
-   sql: CASE WHEN ${TABLE}.most_recent = 1 THEN TRUE ELSE FALSE END;;
+   sql: ${TABLE}.most_recent;;
  }
 
  dimension: in_cycle {
