@@ -27,8 +27,8 @@ view: jira_issues_statistics {
    sql: ${TABLE}.status ;;
  }
 
- filter: most_recent {
-   type: yesno
+ dimension: most_recent {
+   type: number
    description: "Is this the most recent time the Issue went into this Process Step?"
    sql: ${TABLE}.most_recent;;
  }
