@@ -3,11 +3,12 @@ view: jira_issues_fixversions {
   dimension: id {
     primary_key: yes
     sql: fixversions.id;;
+    hidden: yes
   }
 
-  dimension: name {
-    description: "Name"
+  dimension: release {
     sql: fixversions.name;;
+    view_label: "Issues"
   }
 
 }

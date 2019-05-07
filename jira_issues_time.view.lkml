@@ -209,7 +209,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_cycle_min}/10080) as string),"w ", cast(floor(mod(${time_in_cycle_min},10080)/1440) as string),"d ",
     cast(floor(mod(mod(${time_in_cycle_min},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_cycle_min},10080),1440),60) as string), "m");;
     group_label: "Time in Product Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Min Time in Product Cycle"
     hidden:  yes
   }
@@ -219,7 +219,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_cycle_max}/10080) as string),"w ", cast(floor(mod(${time_in_cycle_max},10080)/1440) as string),"d ",
       cast(floor(mod(mod(${time_in_cycle_max},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_cycle_max},10080),1440),60) as string), "m");;
     group_label: "Time in Product Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Max Time in Product Cycle"
     hidden:  yes
   }
@@ -229,7 +229,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_cycle_average}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_cycle_average}) as int64),10080)/1440) as string),"d ",
       cast(floor(mod(mod(cast(floor(${time_in_cycle_average}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_cycle_average}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Product Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Average Time in Product Cycle"
     hidden:  yes
   }
@@ -239,7 +239,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_cycle_median}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_cycle_median}) as int64),10080)/1440) as string),"d ",
     cast(floor(mod(mod(cast(floor(${time_in_cycle_median}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_cycle_median}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Product Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Median Time in Product Cycle"
     hidden:  yes
   }
@@ -249,7 +249,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_min}/10080) as string),"w ", cast(floor(mod(${time_in_eng_cycle_min},10080)/1440) as string),"d ",
       cast(floor(mod(mod(${time_in_eng_cycle_min},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_eng_cycle_min},10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Min Time in Eng Cycle"
   }
 
@@ -258,7 +258,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_max}/10080) as string),"w ", cast(floor(mod(${time_in_eng_cycle_max},10080)/1440) as string),"d ",
       cast(floor(mod(mod(${time_in_eng_cycle_max},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_eng_cycle_max},10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Max Time in Eng Cycle"
   }
 
@@ -267,7 +267,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_average}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_eng_cycle_average}) as int64),10080)/1440) as string),"d ",
       cast(floor(mod(mod(cast(floor(${time_in_eng_cycle_average}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_eng_cycle_average}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Avg Time in Eng Cycle"
   }
 
@@ -276,7 +276,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_median}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_eng_cycle_median}) as int64),10080)/1440) as string),"d ",
       cast(floor(mod(mod(cast(floor(${time_in_eng_cycle_median}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_eng_cycle_median}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Median Time in Eng Cycle"
   }
 
@@ -287,7 +287,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_ex_weekends_min}/10080) as string),"w ", cast(floor(mod(${time_in_eng_cycle_ex_weekends_min},10080)/1440) as string),"d ",
       cast(floor(mod(mod(${time_in_eng_cycle_ex_weekends_min},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_eng_cycle_ex_weekends_min},10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Min Time in Eng Cycle Ex Weekends"
   }
 
@@ -296,7 +296,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_ex_weekends_max}/10080) as string),"w ", cast(floor(mod(${time_in_eng_cycle_ex_weekends_max},10080)/1440) as string),"d ",
       cast(floor(mod(mod(${time_in_eng_cycle_ex_weekends_max},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_eng_cycle_ex_weekends_max},10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Max Time in Eng Cycle Ex Weekends"
   }
 
@@ -305,7 +305,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_ex_weekends_average}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_eng_cycle_ex_weekends_average}) as int64),10080)/1440) as string),"d ",
       cast(floor(mod(mod(cast(floor(${time_in_eng_cycle_ex_weekends_average}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_eng_cycle_ex_weekends_average}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Avg Time in Eng Cycle Ex Weekends"
   }
 
@@ -314,7 +314,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_eng_cycle_ex_weekends_median}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_eng_cycle_ex_weekends_median}) as int64),10080)/1440) as string),"d ",
       cast(floor(mod(mod(cast(floor(${time_in_eng_cycle_ex_weekends_median}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_eng_cycle_ex_weekends_median}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Engineering Cycle"
-    view_label: ""
+    view_label: "Issues"
     label: "Median Time in Eng Cycle Ex Weekends"
   }
 
@@ -325,7 +325,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_waiting_min}/10080) as string),"w ", cast(floor(mod(${time_in_waiting_min},10080)/1440) as string),"d ",
       cast(floor(mod(mod(${time_in_waiting_min},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_waiting_min},10080),1440),60) as string), "m");;
     group_label: "Time in Waiting"
-    view_label: ""
+    view_label: "Issues"
     label: "Min Time in Waiting"
     hidden: yes
   }
@@ -335,7 +335,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_waiting_max}/10080) as string),"w ", cast(floor(mod(${time_in_waiting_max},10080)/1440) as string),"d ",
       cast(floor(mod(mod(${time_in_waiting_max},10080),1440)/60) as string),"h ", cast(mod(mod(mod(${time_in_waiting_max},10080),1440),60) as string), "m");;
     group_label: "Time in Waiting"
-    view_label: ""
+    view_label: "Issues"
     label: "Max Time in Waiting"
     hidden: yes
   }
@@ -345,7 +345,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_waiting_average}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_waiting_average}) as int64),10080)/1440) as string),"d ",
       cast(floor(mod(mod(cast(floor(${time_in_waiting_average}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_waiting_average}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Waiting"
-    view_label: ""
+    view_label: "Issues"
     label: "Avg Time in Waiting"
     hidden: yes
   }
@@ -355,7 +355,7 @@ view: jira_issues_time {
     sql:concat(cast(floor(${time_in_waiting_median}/10080) as string),"w " , cast(floor(mod(cast (floor(${time_in_waiting_median}) as int64),10080)/1440) as string),"d ",
       cast(floor(mod(mod(cast(floor(${time_in_waiting_median}) as int64),10080),1440)/60) as string),"h ",cast(mod(mod(mod(cast(floor(${time_in_waiting_median}) as int64),10080),1440),60) as string), "m");;
     group_label: "Time in Waiting"
-    view_label: ""
+    view_label: "Issues"
     label: "Mean Time in Waiting"
     hidden: yes
   }

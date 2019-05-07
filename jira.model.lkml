@@ -58,11 +58,24 @@ explore: jira_issues_statistics {
     type: left_outer
     relationship: many_to_one
   }
+
+  join: jira_issues_components {
+    view_label: "Components"
+    sql: LEFT JOIN UNNEST(jira_issues.fields.components) as components;;
+    relationship: one_to_many
+  }
+
+  join: jira_issues_fixversions {
+    view_label: "FixVersions"
+    sql:  LEFT JOIN UNNEST(jira_issues.fields.fixversions) as fixversions ;;
+    relationship: one_to_many
+  }
 }
 
 explore: jira_issues {
 
   from: jira_issues
+  view_label: "Issues"
 
   join: jira_issues_comments {
     view_label: "Comments"
