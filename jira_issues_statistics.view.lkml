@@ -2,12 +2,18 @@ view: jira_issues_statistics {
   view_label: "Statistics"
   sql_table_name: prod.jira_issues_statistics ;;
 
- dimension: id {
+ dimension: unique_id {
    type: string
    primary_key: yes
    hidden: yes
-   sql: ${TABLE}.id ;;
+   sql: CONCAT(${TABLE}.id,${TABLE}.status,CAST(${TABLE}.dates AS STRING)) ;;
  }
+
+  dimension: id {
+    type: string
+    hidden: yes
+    sql: ${TABLE}.id ;;
+  }
 
  dimension: key {
    type: string
