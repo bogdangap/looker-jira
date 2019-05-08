@@ -78,6 +78,70 @@ view: jira_issues {
     sql:timestamp(regexp_replace(${TABLE}.fields.created, '(\\d\\d$)', ':\\1'))  ;;
   }
 
+  dimension: age_dimension {
+    type: duration_day
+    description: "Time in days since an Issue was created"
+    sql_start: ${created_raw} ;;
+    #sql_end: COALESCE(${resolution_date_raw},CAST(current_date AS TIMESTAMP));;
+    sql_end: CAST(current_date AS TIMESTAMP);;
+    hidden: yes
+  }
+
+  dimension: open_age_dimension {
+    type: duration_day
+    description: "Time in days from Issue created to Resolved"
+    sql_start: ${created_raw} ;;
+    sql_end: COALESCE(${resolution_date_raw},CAST(current_date AS TIMESTAMP));;
+    hidden: yes
+  }
+
+  measure: age {
+    type: sum
+    description: "Time in days since an Issue was created"
+    sql: ${age_dimension} ;;
+    group_label: "Age"
+
+  }
+
+  measure: open_age {
+    type: sum
+    description: "Time in days since an Issue was created"
+    sql: ${open_age_dimension} ;;
+    group_label: "Age"
+
+  }
+
+  measure: avg_age {
+    description: "Average Time in days since an Issue was created"
+    type: average
+    sql: ${age_dimension} ;;
+    value_format_name: decimal_1
+    group_label: "Age"
+  }
+
+  measure: median_age {
+    type: median
+    description: "Median Time in days since an Issue was created"
+    sql: ${age_dimension} ;;
+    value_format_name: decimal_1
+    group_label: "Age"
+  }
+
+  measure: avg_open_age {
+    description: "Average time in days from Issue created to Resolved"
+    type: average
+    sql: ${open_age_dimension} ;;
+    value_format_name: decimal_1
+    group_label: "Age"
+  }
+
+  measure: median_open_age {
+    type: median
+    description: "Median time in days from Issue created to Resolved"
+    sql: ${open_age_dimension} ;;
+    value_format_name: decimal_1
+    group_label: "Age"
+  }
 
   dimension: creator_email_address {
     type: string
