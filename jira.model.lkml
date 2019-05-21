@@ -59,15 +59,21 @@ explore: jira_issues_statistics {
     relationship: many_to_one
   }
 
+  join: issues_age {
+    sql_on: (${jira_issues_statistics.key} = ${issues_age.key} AND ${jira_issues_statistics.date_date} = ${issues_age.date});;
+    type: inner
+    relationship: many_to_one
+  }
+
   join: jira_issues_components {
     view_label: "Components"
-    sql: LEFT JOIN UNNEST(jira_issues.fields.components) as components;;
+    sql: LEFT JOIN UNNEST(${jira_issues.fields}.components) as components;;
     relationship: one_to_many
   }
 
   join: jira_issues_fixversions {
     view_label: "FixVersions"
-    sql:  LEFT JOIN UNNEST(jira_issues.fields.fixversions) as fixversions ;;
+    sql:  LEFT JOIN UNNEST(${jira_issues.fields}.fixversions) as fixversions ;;
     relationship: one_to_many
   }
 }

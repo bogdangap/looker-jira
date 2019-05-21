@@ -321,16 +321,11 @@ view: jira_issues {
     hidden: no
   }
 
-  measure: priority_multiplier {
+  measure: quality_score {
     type: sum
     sql: ${priority_multiplier_dimension} ;;
     hidden: no
-  }
-
-  measure: quality_score {
-    type: number
-    sql: ${count}*${priority_multiplier} ;;
-    group_label: "Calculated Statistics"
+    drill_fields: [key,summary,status_name,updated_date,quality_score]
   }
 
 }
