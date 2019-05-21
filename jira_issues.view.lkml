@@ -155,12 +155,12 @@ view: jira_issues {
 
   dimension: priority_number {
     type: string
-    sql: CASE WHEN ${priority_name} = "High" THEN "1"
-              WHEN ${priority_name} = "Medium" THEN "2"
-              WHEN ${priority_name} = "Low" THEN "3"
-              WHEN ${priority_name} = "Lowest" THEN "4"
-              WHEN ${priority_name} = "Default" THEN "5"
-              ELSE "0" END
+    sql: CASE WHEN ${priority_name} = "Highest" THEN "1"
+              WHEN ${priority_name} = "High" THEN "2"
+              WHEN ${priority_name} = "Medium" THEN "3"
+              WHEN ${priority_name} = "Low" THEN "4"
+              WHEN ${priority_name} = "Lowest" THEN "5"
+              ELSE "5" END
               ;;
   }
 
@@ -325,7 +325,7 @@ view: jira_issues {
     type: sum
     sql: ${priority_multiplier_dimension} ;;
     hidden: no
-    drill_fields: [key,summary,status_name,updated_date,quality_score]
+    drill_fields: [key,summary,priority_number,status_name,updated_date,quality_score]
   }
 
 }
