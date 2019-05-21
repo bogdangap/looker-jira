@@ -71,9 +71,9 @@ explore: jira_issues_statistics {
     relationship: one_to_many
   }
 
-  join: jira_issues_fixversions {
-    view_label: "FixVersions"
-    sql:  LEFT JOIN UNNEST(${jira_issues.fields}.fixversions) as fixversions ;;
+  join: jira_issues_versions {
+    view_label: "Versions"
+    sql:  LEFT JOIN UNNEST(${jira_issues.fields}.versions) as versions ;;
     relationship: one_to_many
   }
 }
@@ -95,9 +95,9 @@ explore: jira_issues {
     relationship: one_to_many
   }
 
-  join: jira_issues_fixversions {
-    view_label: "FixVersions"
-    sql:  LEFT JOIN UNNEST(jira_issues.fields.fixversions) as fixversions ;;
+  join: jira_issues_versions {
+    view_label: "Versions"
+    sql:  LEFT JOIN UNNEST(jira_issues.fields.versions) as versions ;;
     relationship: one_to_many
   }
 

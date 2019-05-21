@@ -1,13 +1,13 @@
-view: jira_issues_fixversions {
+view: jira_issues_versions {
 
   dimension: id {
     primary_key: yes
-    sql: fixversions.id;;
+    sql: versions.id;;
     hidden: yes
   }
 
   dimension: release {
-    sql: fixversions.name;;
+    sql: versions.name;;
     view_label: "Issues"
   }
 
@@ -22,7 +22,7 @@ view: jira_issues_fixversions {
       quarter,
       year
     ]
-    sql: CAST(fixversions.releaseDate AS TIMESTAMP) ;;
+    sql: CAST(versions.releaseDate AS TIMESTAMP) ;;
     view_label: "Issues"
   }
 
