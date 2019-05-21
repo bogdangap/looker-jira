@@ -77,6 +77,7 @@ view: issues_age {
       type: average
       sql:${age_dimension}  ;;
       value_format_name: decimal_1
+      drill_fields: [key,date,age_dimension]
     }
 
 
