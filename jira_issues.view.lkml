@@ -270,7 +270,7 @@ view: jira_issues {
 
   measure: count {
     type: count
-    drill_fields: [key,summary]
+    drill_fields: [key,link,summary]
   }
 
   measure: days_logged_on_completed_stories {
@@ -325,7 +325,7 @@ view: jira_issues {
     type: sum
     sql: ${priority_multiplier_dimension} ;;
     hidden: no
-    drill_fields: [key,summary,priority_number,status_name,updated_date,quality_score]
+    drill_fields: [key,link,summary,priority_number,status_name,updated_date,quality_score]
   }
 
 }
