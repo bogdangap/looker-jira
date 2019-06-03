@@ -235,6 +235,14 @@ view: jira_issues {
   ELSE NULL END ;;
   }
 
+  dimension: team {
+    type: string
+    sql: CASE
+          WHEN ${labels_string} LIKE '%team_quokka%' THEN 'Quokka'
+          WHEN ${labels_string} LIKE '%team_dogtopus%' THEN 'Dogtopus'
+        ELSE NULL END ;;
+  }
+
   measure: story_points_sum {
     type: sum
     sql: ${TABLE}.fields.customfield_10021 ;;
