@@ -1,10 +1,21 @@
 view: jira_retrospectives {
   sql_table_name: prod.jira_retrospectives ;;
 
+  dimension: id {
+    primary_key: yes
+    type: string
+    sql: CONCAT(${TABLE}.name,COALESCE(${TABLE}.team,'none')) ;;
+  }
+
   dimension: name {
-      primary_key: yes
       type: string
       sql: ${TABLE}.name ;;
+  }
+
+  dimension: team {
+    type: string
+    sql: CASE WHEN ${TABLE}.team = 'dogtopus' THEN 'Dogtopus' WHEN ${TABLE}.team = 'quokka' THEN 'Quokka' ELSE ${TABLE}.team END;;
+    hidden: no
   }
 
   measure: work_days {

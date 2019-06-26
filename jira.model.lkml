@@ -33,6 +33,13 @@ explore: jira_issues_statistics {
     type: inner
     relationship: many_to_one
   }
+  #NEW RETRO JOIN!?!?!?
+  #join: jira_retrospectives {
+  #  view_label: "Retrospectives"
+  #  sql_on: (${jira_issues_statistics.retrospective} = ${jira_retrospectives.name} AND ${jira_issues.team} = ${jira_retrospectives.team});;
+  #  type: left_outer
+  #  relationship: many_to_one
+  #}
   join: issues_by_status {
     sql_on: (${jira_issues_statistics.key} = ${issues_by_status.key} AND ${jira_issues_statistics.status} = ${issues_by_status.status});;
     type: left_outer
@@ -58,24 +65,27 @@ explore: jira_issues_statistics {
     type: left_outer
     relationship: many_to_one
   }
-
   join: issues_age {
     sql_on: (${jira_issues_statistics.key} = ${issues_age.key} AND ${jira_issues_statistics.date_date} = ${issues_age.date});;
     type: inner
     relationship: many_to_one
   }
-
   join: jira_issues_components {
     view_label: "Components"
     sql: LEFT JOIN UNNEST(${jira_issues.fields}.components) as components;;
     relationship: one_to_many
   }
-
   join: jira_issues_versions {
     view_label: "Versions"
     sql:  LEFT JOIN UNNEST(${jira_issues.fields}.versions) as versions ;;
     relationship: one_to_many
   }
+
+  #join: jira_issues_terms {
+  #  sql_on: ${jira_issues_statistics.key} = ${jira_issues_terms.key};;
+  #  type: left_outer
+  #  relationship: one_to_many
+  #}
 }
 
 explore: jira_issues {
@@ -124,7 +134,8 @@ explore: jira_issues {
     view_label: "Retrospectives"
     sql_on: jira_issues.fields.resolutiondate is not null
            and ${jira_retrospectives.start_date_date} <= ${jira_issues.resolution_date_date}
-          AND ${jira_retrospectives.end_date_date} > ${jira_issues.resolution_date_date};;
+          AND ${jira_retrospectives.end_date_date} > ${jira_issues.resolution_date_date}
+           /*AND ${jira_issues.team}=${jira_retrospectives.team}*/;;
     type:  inner
     relationship: many_to_one
   }
