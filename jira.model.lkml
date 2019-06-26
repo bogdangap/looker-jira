@@ -133,9 +133,9 @@ explore: jira_issues {
   join: jira_retrospectives {
     view_label: "Retrospectives"
     sql_on: jira_issues.fields.resolutiondate is not null
-           and ${jira_retrospectives.start_date_date} <= ${jira_issues.resolution_date_date}
+           AND ${jira_retrospectives.start_date_date} <= ${jira_issues.resolution_date_date}
           AND ${jira_retrospectives.end_date_date} > ${jira_issues.resolution_date_date}
-           /*AND ${jira_issues.team}=${jira_retrospectives.team}*/;;
+           AND ${jira_retrospectives.team}=${jira_issues.team};;
     type:  inner
     relationship: many_to_one
   }

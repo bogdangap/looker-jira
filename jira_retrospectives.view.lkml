@@ -14,8 +14,8 @@ view: jira_retrospectives {
 
   dimension: team {
     type: string
-    sql: CASE WHEN ${TABLE}.team = 'dogtopus' THEN 'Dogtopus' WHEN ${TABLE}.team = 'quokka' THEN 'Quokka' ELSE ${TABLE}.team END;;
-    hidden: no
+    sql: CASE WHEN ${TABLE}.team = 'dogtopus' THEN 'Dogtopus' WHEN ${TABLE}.team = 'quokka' THEN 'Quokka' WHEN ${TABLE}.team IS NULL THEN 'Legacy' ELSE ${TABLE}.team END;;
+    hidden: yes
   }
 
   measure: work_days {
