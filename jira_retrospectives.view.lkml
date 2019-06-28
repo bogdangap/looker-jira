@@ -14,7 +14,7 @@ view: jira_retrospectives {
 
   dimension: team {
     type: string
-    sql: CASE WHEN ${TABLE}.team = 'dogtopus' THEN 'Dogtopus' WHEN ${TABLE}.team = 'quokka' THEN 'Quokka' WHEN ${TABLE}.team IS NULL THEN 'Legacy' ELSE ${TABLE}.team END;;
+    sql: CASE WHEN ${TABLE}.team = 'dogtopus' THEN 'Dogtopus' WHEN ${TABLE}.team = 'quokka' THEN 'Quokka' WHEN ${TABLE}.team IS NULL THEN 'No Team' ELSE ${TABLE}.team END;;
     hidden: yes
   }
 

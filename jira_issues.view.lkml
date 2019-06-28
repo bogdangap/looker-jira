@@ -240,7 +240,7 @@ view: jira_issues {
     sql: CASE
           WHEN ${labels_string} LIKE '%team_quokka%' THEN 'Quokka'
           WHEN ${labels_string} LIKE '%team_dogtopus%' THEN 'Dogtopus'
-        WHEN (${labels_string} NOT LIKE '%team_quokka%' AND ${labels_string} NOT LIKE '%team_dogtopus%') THEN 'Legacy' ElSE NULL END ;;
+        WHEN (${labels_string} NOT LIKE '%team_quokka%' AND ${labels_string} NOT LIKE '%team_dogtopus%') THEN 'No Team' ElSE NULL END ;;
   }
 
   measure: story_points_sum {

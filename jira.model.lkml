@@ -21,16 +21,16 @@ explore: jira_issues_statistics {
     #-jira_issues.count,
   ]
 
-  join: jira_retrospectives {
-    view_label: "Retrospectives"
-    sql_on: ${jira_issues_statistics.retrospective} = ${jira_retrospectives.name};;
-    type: left_outer
-    relationship: many_to_one
-  }
   join: jira_issues {
     view_label: "Issues"
     sql_on: ${jira_issues_statistics.key} = ${jira_issues.key};;
     type: inner
+    relationship: many_to_one
+  }
+  join: jira_retrospectives {
+    view_label: "Retrospectives"
+    sql_on: (${jira_issues_statistics.retrospective} = ${jira_retrospectives.name}/* AND ${jira_issues.team} = ${jira_retrospectives.team}*/);;
+    type: left_outer
     relationship: many_to_one
   }
   #NEW RETRO JOIN!?!?!?
