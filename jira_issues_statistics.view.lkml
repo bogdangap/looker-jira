@@ -107,12 +107,18 @@ view: jira_issues_statistics {
  #  sql: ${TABLE}.term ;;
  #}
 
- dimension: workday {
-   type: yesno
-   hidden: no
-   sql:${TABLE}.workday IS TRUE;;
-  description: "Exclude Weekends except weekend days where a status was started"
- }
+  dimension: team {
+    type: string
+    sql: CASE WHEN ${TABLE}.team = 'dogtopus' THEN 'Dogtopus' WHEN ${TABLE}.team = 'quokka' THEN 'Quokka' WHEN ${TABLE}.team IS NULL THEN 'No Team' ELSE ${TABLE}.team END;;
+    hidden: yes
+  }
+
+  dimension: workday {
+     type: yesno
+     hidden: no
+     sql:${TABLE}.workday IS TRUE;;
+    description: "Exclude Weekends except weekend days where a status was started"
+   }
 
  dimension: weekday {
    type: yesno

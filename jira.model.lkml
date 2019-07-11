@@ -29,7 +29,7 @@ explore: jira_issues_statistics {
   }
   join: jira_retrospectives {
     view_label: "Retrospectives"
-    sql_on: (${jira_issues_statistics.retrospective} = ${jira_retrospectives.name}/* AND ${jira_issues.team} = ${jira_retrospectives.team}*/);;
+    sql_on: (${jira_issues_statistics.retrospective} = ${jira_retrospectives.name} AND ${jira_issues_statistics.team} = ${jira_retrospectives.team});;
     type: left_outer
     relationship: many_to_one
   }
