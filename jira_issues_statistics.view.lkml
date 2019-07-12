@@ -53,6 +53,7 @@ view: jira_issues_statistics {
      day_of_week,
      week,
      month,
+     day_of_month,
      quarter,
      year
    ]
