@@ -80,5 +80,12 @@ view: issues_age {
       drill_fields: [key,date,age_dimension]
     }
 
+    measure: median_age_by_date {
+      type: median
+      sql:${age_dimension};;
+      value_format_name: decimal_1
+      drill_fields: [key,date,age_dimension]
+    }
+
 
   }
