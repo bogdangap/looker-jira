@@ -66,7 +66,25 @@ explore: jira_issues_statistics {
     relationship: many_to_one
   }
   join: issues_age {
-    sql_on: (${jira_issues_statistics.key} = ${issues_age.key} AND ${jira_issues_statistics.date_date} = ${issues_age.date});;
+    sql_on: (${jira_issues_statistics.key} = ${issues_age.key} AND
+    {% if jira_issues_statistics.date_week._in_query %}
+      CAST(${jira_issues_statistics.date_date} AS DATE)
+      {% elsif jira_issues_statistics.date_week._in_query %}
+      DATE_TRUNC(CAST(${jira_issues_statistics.date_date} AS DATE), WEEK)
+      {% elsif jira_issues_statistics.date_month._in_query %}
+      DATE_TRUNC(CAST(${jira_issues_statistics.date_date} AS DATE), MONTH)
+      {% elsif jira_issues_statistics.date_quarter._in_query %}
+      DATE_TRUNC(CAST(${jira_issues_statistics.date_date} AS DATE), QUARTER)
+      {% elsif jira_issues_statistics.date_year._in_query %}
+      DATE_TRUNC(CAST(${jira_issues_statistics.date_date} AS DATE), YEAR)
+      {% else %}
+      CAST(${jira_issues_statistics.date_date} AS DATE)
+      {% endif %}
+     = ${issues_age.date});;
+
+
+
+
     type: inner
     relationship: many_to_one
   }
