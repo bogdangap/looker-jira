@@ -80,11 +80,8 @@ explore: jira_issues_statistics {
       {% else %}
       CAST(${jira_issues_statistics.date_date} AS DATE)
       {% endif %}
-     = ${issues_age.date});;
-
-
-
-
+     = ${issues_age.date})
+    ;;
     type: inner
     relationship: many_to_one
   }
@@ -99,11 +96,11 @@ explore: jira_issues_statistics {
     relationship: one_to_many
   }
 
-  #join: jira_issues_terms {
-  #  sql_on: ${jira_issues_statistics.key} = ${jira_issues_terms.key};;
-  #  type: left_outer
-  #  relationship: one_to_many
-  #}
+  join: engineering_terms {
+    sql_on: ${jira_issues_statistics.date_date} = ${engineering_terms.calendar_day_date};;
+    type: left_outer
+    relationship: many_to_one
+  }
 }
 
 explore: jira_issues {
