@@ -28,11 +28,6 @@ view: engineering_terms {
     sql: ${TABLE}.term ;;
   }
 
-  filter: current_engineering_term {
-    type: yesno
-    sql: ${e_term} = ${current_e_term.e_term};;
-  }
-
   #measure: count {
   #  type: count
   #  drill_fields: []
