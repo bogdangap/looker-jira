@@ -101,6 +101,12 @@ explore: jira_issues_statistics {
     type: left_outer
     relationship: many_to_one
   }
+
+  join: current_e_term {
+    sql_on: ${engineering_terms.e_term} = ${current_e_term.e_term};;
+    type: inner
+    relationship: many_to_one
+  }
 }
 
 explore: jira_issues {

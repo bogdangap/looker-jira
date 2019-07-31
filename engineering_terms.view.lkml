@@ -19,12 +19,18 @@ view: engineering_terms {
 
   dimension: e_term {
     type: string
+    label: "Engineering Term"
     sql: ${TABLE}.e_term ;;
   }
 
   dimension: term {
     type: string
     sql: ${TABLE}.term ;;
+  }
+
+  filter: current_engineering_term {
+    type: yesno
+    sql: ${e_term} = ${current_e_term.e_term};;
   }
 
   #measure: count {
