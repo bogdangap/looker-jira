@@ -33,6 +33,7 @@ view: current_e_term {
   }
 
   dimension: past_e_terms_filter {
+    label: "Past Engineering Term Filter"
     view_label: "Terms"
     type: number
     sql: ${TABLE}.past_e_terms ;;
@@ -46,6 +47,7 @@ view: current_e_term {
   }
 
   dimension: e_term_filter {
+    label: "Current Engineering Term Filter"
     view_label: "Terms"
     type: string
     sql: ${TABLE}.e_term_filter ;;
