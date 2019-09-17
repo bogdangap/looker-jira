@@ -32,7 +32,7 @@ view: issues_daily {
         SELECT DISTINCT status,
           CASE WHEN status = 'Cancelled' THEN '0. Cancelled'
             WHEN status IN ('Backlog','Reported') THEN '1. Backlog'
-            WHEN status IN ('Ranked','Ready to Start') THEN '2. Preparation'
+            WHEN status IN ('Ranked','Planned','Ready to Start') THEN '2. Preparation'
             WHEN status IN ('In Progress','In Review','Polishing','Ready to Merge') THEN '3. In Progress'
             WHEN status = 'Ready for Testing' THEN '4. QA'
             WHEN status = 'Closed' THEN '5. Completion'
