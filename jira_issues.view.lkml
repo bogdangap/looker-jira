@@ -225,6 +225,7 @@ view: jira_issues {
   }
 
   dimension: term {
+    hidden: yes
     type: string
     sql: CASE
     WHEN ${labels_string} LIKE '%2019-t1%' THEN '2019-T1'

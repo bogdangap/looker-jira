@@ -96,6 +96,13 @@ explore: jira_issues_statistics {
     relationship: one_to_many
   }
 
+  join: jira_issues_terms {
+    view_label: "Retrospectives"
+    sql_on: (${jira_issues_statistics.key} = ${jira_issues_terms.key} AND ${jira_issues_statistics.date_date} = ${jira_issues_terms.date_date});;
+    type: left_outer
+    relationship: many_to_one
+  }
+
   join: engineering_terms {
     sql_on: ${jira_issues_statistics.date_date} = ${engineering_terms.calendar_day_date};;
     type: left_outer
