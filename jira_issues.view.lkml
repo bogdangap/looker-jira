@@ -204,6 +204,18 @@ view: jira_issues {
     sql: ${TABLE}.fields.status.name ;;
   }
 
+  dimension: current_process_step {
+    type: string
+    sql: CASE WHEN ${status_name} = 'Cancelled' THEN '0. Cancelled'
+          WHEN ${status_name} IN ('Backlog','Reported') THEN '1. Backlog'
+          WHEN ${status_name} IN ('Ranked','Planned','Ready to Start','In Prep') THEN '2. Preparation'
+          WHEN ${status_name} IN ('In Progress','In Review','Polishing','Ready to Merge','Building') THEN '3. In Progress'
+          WHEN ${status_name} IN ('Ready for Testing','In Testing') THEN '4. QA'
+          WHEN ${status_name} IN ('Holding','Limited Release','Removing Flag','Released') THEN '5. Product Release'
+          WHEN ${status_name} IN ('Closed') THEN '6. Completion'
+          ELSE 'Legacy' END;;
+  }
+
   dimension: reporter_email_address {
     type: string
     sql: ${TABLE}.fields.reporter.emailAddress ;;
@@ -279,7 +291,7 @@ view: jira_issues {
 
   measure: count {
     type: count
-    drill_fields: [key,link,summary]
+    drill_fields: [key,link,summary,story_points_sum]
   }
 
   measure: days_logged_on_completed_stories {

@@ -114,6 +114,18 @@ explore: jira_issues_statistics {
     type: inner
     relationship: many_to_one
   }
+
+  join: jira_streams {
+    sql_on: ${jira_issues_statistics.key} = ${jira_streams.key};;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: term_calculations {
+    sql_on: ${engineering_terms.calendar_day_date} = ${term_calculations.calendar_day_date};;
+    type: inner
+    relationship: many_to_one
+  }
 }
 
 explore: jira_issues {

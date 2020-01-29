@@ -21,11 +21,11 @@ view: jira_issues_statistics {
    sql: ${TABLE}.key ;;
  }
 
- dimension: process_step {
-   type: string
-   hidden: no
-   sql: ${TABLE}.process_step ;;
- }
+ #dimension: process_step {
+#   type: string
+#   hidden: no
+#   sql: ${TABLE}.process_step ;;
+# }
 
  dimension: status {
    type: string
@@ -44,6 +44,18 @@ view: jira_issues_statistics {
    hidden: no
    sql:${TABLE}.in_cycle;;
  }
+
+dimension: process_step {
+  type: string
+  sql: CASE WHEN ${status} = 'Cancelled' THEN '0. Cancelled'
+    WHEN ${status} IN ('Backlog','Reported') THEN '1. Backlog'
+    WHEN ${status} IN ('Ranked','Planned','Ready to Start','In Prep') THEN '2. Preparation'
+    WHEN ${status} IN ('In Progress','In Review','Polishing','Ready to Merge','Building') THEN '3. In Progress'
+    WHEN ${status} IN ('Ready for Testing','In Testing') THEN '4. QA'
+    WHEN ${status} IN ('Holding','Limited Release','Removing Flag','Released') THEN '5. Product Release'
+    WHEN ${status} IN ('Closed') THEN '6. Completion'
+    ELSE 'Legacy' END;;
+}
 
  dimension_group: date {
    type: time
