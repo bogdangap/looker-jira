@@ -121,6 +121,12 @@ explore: jira_issues_statistics {
     relationship: many_to_one
   }
 
+  join: stream_filter {
+    sql_on: ${jira_streams.stream} = ${stream_filter.stream};;
+    type: inner
+    relationship: many_to_one
+  }
+
   join: term_calculations {
     sql_on: ${engineering_terms.calendar_day_date} = ${term_calculations.calendar_day_date};;
     type: inner
